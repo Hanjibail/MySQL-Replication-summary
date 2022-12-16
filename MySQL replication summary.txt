@@ -1,0 +1,49 @@
+MYSQL Replication Summary
+ 
+Replication is the copying the data from one MySQL database server to other MySQl database server.
+
+To create the Replicas we have to create Replication configuration and implement the replications.Below are the different types to configure the replication in MySQL. 
+
+1)Binary Log File position based Replication:
+ In this replicas are configures to read the binary log from the source and executes the replication events in the binary log.
+Each replicas have the copy of the entire content of the binary log.
+
+Important Points to be considered
+*Need to ensure that the binary logging is enabled and established the unique server ID
+*Each replica connects to the source using username and password .So there must be user account to connect and give the replication privilage.
+*Get the source current coordinate to start the replication 
+*Choosing the method for datasnapshots - MySQL dump and Raw data files
+*Adding replication topology - add another replica to an existing replication
+ 
+2)Replication with Global transaction Identifiers:
+In this replication using global transaction identifiers (GTIDs).Each transaction can be identified and tracked by the replicas.It will not require to check the log files for the changes.
+
+3) Changing Replication Modes on onlines Servers:
+In this replication can be done online without take the server to offline .
+
+4)MySQL Multi-Source Replication:
+MySQL multi source replication enable to replicate the data from multiple sources in parellel.It creates replication channel for each souce.
+
+Once the replication has started need to check the status of the replication and do some task .
+MySQL allow to check the status by using SHOW SLAVE STATUS.Also we can stop  and start the replication by using the STOP SLAVE and START SLAVE.Some time replication stops due to transaction fails during those we can skip the transaction and continue to replication.
+
+Replication Implementation
+Replication is based on the replication source server keeping track of all changes to its databases in its binary log.So we need to implement the replication in such a way that whatever the changes done to the source binary code it will changes in the replication. So wee need to check the Replication format , replication channnel, replication filtering rules.
+
+Replication Solutions.
+By implementing the replication it will give different solutions.
+*Replications for backup
+*Replication for scale-out
+*Improving performance
+*switching source during failover
+
+Troubleshooting the replication
+If replication is not working then need to check first error log messages.
+Check for binary log enabled
+check for server ID should unique
+check the status 
+
+
+
+
+
